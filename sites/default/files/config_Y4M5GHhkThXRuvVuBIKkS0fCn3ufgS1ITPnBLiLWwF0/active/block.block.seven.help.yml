@@ -1,0 +1,21 @@
+id: seven.help
+label: ''
+uuid: d587dae5-f6b6-4f2b-8000-0f5baf9b0c4d
+region: help
+weight: '0'
+module: system
+status: '1'
+visibility:
+  path:
+    visibility: '0'
+    pages: ''
+  role:
+    roles: {  }
+  node_type:
+    types:
+      article: '0'
+      page: '0'
+  visibility__active_tab: edit-visibility-path
+plugin: system_help_block
+settings:
+  cache: '-1'

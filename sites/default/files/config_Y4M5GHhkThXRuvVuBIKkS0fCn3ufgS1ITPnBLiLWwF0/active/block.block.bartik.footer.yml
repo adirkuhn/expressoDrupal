@@ -1,0 +1,21 @@
+id: bartik.footer
+label: 'Footer menu'
+uuid: 03b0a136-baea-4db9-ab04-4b0352f70824
+region: footer
+weight: '0'
+module: system
+status: '1'
+visibility:
+  path:
+    visibility: '0'
+    pages: ''
+  role:
+    roles: {  }
+  node_type:
+    types:
+      article: '0'
+      page: '0'
+  visibility__active_tab: edit-visibility-path
+plugin: 'system_menu_block:menu-footer'
+settings:
+  cache: '-1'

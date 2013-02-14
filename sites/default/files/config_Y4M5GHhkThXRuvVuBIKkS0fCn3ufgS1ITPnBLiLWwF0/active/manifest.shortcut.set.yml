@@ -1,0 +1,4 @@
+default:
+  name: shortcut.set.default
+name:
+  name: shortcut.set.name

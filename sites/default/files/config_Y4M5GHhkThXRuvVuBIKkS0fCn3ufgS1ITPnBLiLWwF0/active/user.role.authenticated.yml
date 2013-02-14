@@ -1,0 +1,5 @@
+id: authenticated
+uuid: 71ec6312-8e28-4cff-8f00-c2c80a5a07a3
+label: 'Authenticated user'
+weight: '1'
+langcode: und

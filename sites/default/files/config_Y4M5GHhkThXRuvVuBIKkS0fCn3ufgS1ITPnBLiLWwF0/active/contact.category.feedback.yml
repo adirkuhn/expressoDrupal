@@ -1,0 +1,8 @@
+id: feedback
+uuid: 5733e37f-d0e1-43ca-b708-8e3c2a207efe
+label: 'Website feedback'
+recipients:
+  - ''
+reply: ''
+weight: '0'
+langcode: und

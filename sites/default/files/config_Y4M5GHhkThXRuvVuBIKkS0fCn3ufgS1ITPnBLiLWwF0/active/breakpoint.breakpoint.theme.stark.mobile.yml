@@ -1,0 +1,11 @@
+id: theme.stark.mobile
+uuid: 7ad2a4ab-5be1-4024-a703-3fea3a21117f
+name: mobile
+label: mobile
+mediaQuery: '(min-width: 0px)'
+source: stark
+sourceType: theme
+weight: '0'
+multipliers:
+  1x: 1x
+langcode: und

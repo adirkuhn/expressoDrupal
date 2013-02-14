@@ -1,0 +1,207 @@
+<?php
+
+/**
+ * @file
+ * Module file for ExpressoContacts.
+ */
+
+
+//MENU
+function ExpressoContacts_menu() {
+    $items['contatos'] = array(
+        'title' => 'Contatos',
+        'page callback' => 'exibir_contatos',
+        'access arguments' => array('access page manager'),
+        'expanded' => TRUE,
+    );
+
+    $items['contatos/editar'] = array(
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('ExpressoContacts_editar'),
+        'access arguments' => array('access page manager'),
+    );
+
+    $items['contatos/adicionar'] = array(
+        'title' => 'Adicionar Contato',
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('ExpressoContacts_adicionar'),
+        'access arguments' => array('access page manager'),
+        'expanded' => TRUE,
+    );
+
+    return $items;
+}
+
+
+
+//func
+function exibir_contatos($args = 0) {
+    $result = db_query('SELECT * FROM expresso_expresso_contacts');
+    
+    $rows = array();
+    if ($result->rowCount() > 0) {
+        foreach ($result as $record) {
+            $rows[] = array(
+                'id' => $record->id,
+                'nome' => $record->nome,
+                'apelido' => $record->apelido,
+                'telefone' => $record->telefone,
+                'email' => $record->email,
+
+                //'action' => l('Edit', 'contatos/edit', array('query' => array('id' => $record->id))),
+                'action' => l('Editar', 'contatos/editar', array('query' => array('id' => $record->id))),
+                'action2' => l('Remover', 'contatos/remover', array('query' => array('id' => $record->id))),
+
+            );
+        }
+
+        $header = array('ID', 'Nome', 'Apelido', 'Telefone', 'Email', 'Editar', 'Remover');
+
+        $output = theme('table', array('header' => $header, 'rows' => $rows));
+    }
+    else {
+        $add = l('Adicionar novo Contato', 'contatos/adicionar');
+        $output = t('No contacts. Add new one!' . $add);
+    }
+
+    return $output;
+}
+
+function ExpressoContacts_editar($form, &$form_submit) {
+
+    $id = (int)$_GET['id'];
+
+    if ($id === 0 ) {
+        return $form;
+    }
+
+    $result = db_query('SELECT * FROM expresso_expresso_contacts WHERE id='.$id);
+
+    $record = $result->fetchObject();
+
+    $form['id'] = array(
+        '#value' => $record->id,
+        '#type' => 'textfield',
+    );
+
+    $form['nome'] = array(
+        '#title' => t('Nome'),
+        '#type' => 'textfield',
+        '#default_value' => $record->nome,
+        '#required' => TRUE,
+        '#description' => t('Nome do contato.'),
+    );
+
+    $form['apelido'] = array(
+        '#title' => t('Apelido'),
+        '#type' => 'textfield',
+        '#default_value' => $record->apelido,
+        '#required' => TRUE,
+        '#description' => t('Apelido do contato.'),
+    );
+
+    $form['telefone'] = array(
+        '#title' => t('Telefone'),
+        '#type' => 'textfield',
+        '#default_value' => $record->telefone,
+        '#required' => TRUE,
+        '#description' => t('Telefone do contato.'),
+    );
+
+    $form['email'] = array(
+        '#title' => t('Email'),
+        '#type' => 'textfield',
+        '#default_value' => $record->email,
+        '#required' => TRUE,
+        '#description' => t('Email do contato.'),
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Editar',
+    );
+
+    //kprint_r($form);
+    return $form;
+}
+
+function ExpressoContacts_adicionar($form, &$form_submit) {
+
+    $form['nome'] = array(
+        '#title' => t('Nome'),
+        '#type' => 'textfield',
+        '#required' => TRUE,
+        '#description' => t('Nome do contato.'),
+    );
+
+    $form['apelido'] = array(
+        '#title' => t('Apelido'),
+        '#type' => 'textfield',       
+        '#required' => TRUE,
+        '#description' => t('Apelido do contato.'),
+    );
+
+    $form['telefone'] = array(
+        '#title' => t('Telefone'),
+        '#type' => 'textfield',
+        '#required' => TRUE,
+        '#description' => t('Telefone do contato.'),
+    );
+
+    $form['email'] = array(
+        '#title' => t('Email'),
+        '#type' => 'textfield',
+        '#required' => TRUE,
+        '#description' => t('Email do contato.'),
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => 'Criar',
+    );
+
+    //kprint_r($form);
+    return $form;
+}
+
+
+function ExpressoContacts_editar_submit($form, &$form_submit) {
+    //print_r($form_submit['values']); die('bananas');
+
+    $id = (int)$form_submit['values']['id'];
+    $nome = $form_submit['values']['nome'];
+    $apelido = $form_submit['values']['apelido'];
+    $telefone  = $form_submit['values']['telefone'];
+    $email = $form_submit['values']['email'];
+
+    $result = db_query('
+        UPDATE
+            expresso_expresso_contacts
+        SET
+            nome=\'' . $nome . '\',
+            apelido=\'' . $apelido . '\',
+            telefone=\''. $telefone . '\',
+            email=\''. $email .'\'
+        WHERE
+            id='.$id);
+    $form_submit['redirect'] = 'contatos/';
+    //$result = db_query("UPDATE expresso_contacts SET nome='{$nome}' WHERE id={$id}");
+    //$result = db_query('UPDATE expresso_contacts SET nome=\''.$nome.'\' WHERE id='.$id);
+}
+
+function ExpressoContacts_adicionar_submit($form, &$form_submit) {
+    $nome = $form_submit['values']['nome'];
+    $apelido = $form_submit['values']['apelido'];
+    $telefone  = $form_submit['values']['telefone'];
+    $email = $form_submit['values']['email'];
+
+    $result = db_query('
+        INSERT INTO
+            expresso_expresso_contacts
+        SET
+            nome=\'' . $nome . '\',
+            apelido=\'' . $apelido . '\',
+            telefone=\''. $telefone . '\',
+            email=\''. $email .'\'');
+    $form_submit['redirect'] = 'contatos/';
+}

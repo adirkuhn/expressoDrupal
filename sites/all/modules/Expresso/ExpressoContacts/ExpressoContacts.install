@@ -1,0 +1,58 @@
+<?php
+/**
+ * @file
+ * Expresso Contacts Install
+ */
+
+function ExpressoContacts_schema() {
+
+    $schema['expresso_contacts'] = array(
+        'description' => 'Expresso contacts database info.',
+        'fields' => array(
+
+            'id' => array(
+                'description' => 'primary key',
+                'type' => 'serial',
+                'unsigned' => true,
+                'not null' => true,
+            ),
+
+            'nome' => array(
+                'description' => 'nome do contato',
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => true,
+            ),
+
+            'apelido' => array(
+                'description' => 'apelido do contato',
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => false,
+            ),
+
+            'telefone' => array(
+                'description' => 'telefone do contato',
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => true,
+            ),
+
+            'email' => array(
+                'description' => 'email do contato',
+                'type' => 'varchar',
+                'length' => '255',
+                'not null' => true,
+            ),
+
+        ),
+
+        'primary key' => array('id'),
+    );
+
+    return $schema;
+}
+
+// function ExpressoContatcs_uninstall() {
+//     //remove tudo krl
+// }

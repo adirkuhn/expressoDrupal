@@ -1,0 +1,21 @@
+id: bartik.login
+label: 'User login'
+uuid: 309c654f-8cea-4446-9f40-64707811fc11
+region: sidebar_first
+weight: '0'
+module: user
+status: '1'
+visibility:
+  path:
+    visibility: '0'
+    pages: ''
+  role:
+    roles: {  }
+  node_type:
+    types:
+      article: '0'
+      page: '0'
+  visibility__active_tab: edit-visibility-path
+plugin: user_login_block
+settings:
+  cache: '-1'

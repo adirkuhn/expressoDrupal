@@ -1,0 +1,13 @@
+id: user.user.default
+uuid: fbdbd6c5-3d86-4002-8a00-ffedf889903c
+targetEntityType: user
+bundle: user
+viewMode: default
+content:
+  user_picture:
+    label: hidden
+    type: image
+    settings:
+      image_style: thumbnail
+      image_link: content
+    weight: '0'

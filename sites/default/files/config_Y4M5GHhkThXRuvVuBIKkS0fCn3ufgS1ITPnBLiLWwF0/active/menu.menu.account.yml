@@ -1,0 +1,5 @@
+id: account
+uuid: 8ae2f842-cbaa-42b4-8443-67bed0b90b2b
+label: 'User account menu'
+description: 'Links related to the user account.'
+langcode: und

@@ -1,0 +1,21 @@
+id: bartik.powered
+label: ''
+uuid: 0ff3250f-290c-4950-bf00-a4ffd48333bd
+region: footer
+weight: '10'
+module: system
+status: '1'
+visibility:
+  path:
+    visibility: '0'
+    pages: ''
+  role:
+    roles: {  }
+  node_type:
+    types:
+      article: '0'
+      page: '0'
+  visibility__active_tab: edit-visibility-path
+plugin: system_powered_by_block
+settings:
+  cache: '-1'
